@@ -688,7 +688,7 @@
                 android:layout_height="65dp"
                 android:layout_margin="10dp"
                 android:backgroundTint="#2D2D2D"
-                android:text="log("
+                android:text="log(,)"
                 android:textColor="@color/white"
                 android:textSize="12dp"
                 app:cornerRadius="24dp" />
@@ -700,7 +700,7 @@
                 android:layout_height="65dp"
                 android:layout_margin="10dp"
                 android:backgroundTint="#2D2D2D"
-                android:text="log(,2)"
+                android:text="floor("
                 android:textColor="@color/white"
                 android:textSize="8dp"
                 app:cornerRadius="36dp" />
