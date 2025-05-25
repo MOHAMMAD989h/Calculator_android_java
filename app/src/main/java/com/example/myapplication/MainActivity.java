@@ -3,6 +3,8 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences.Editor editor;
 
     private Switch swichDark;
+    String[] buttonList = new String[1000];
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -100,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Btnswich1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Btnswich1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1B6A9C")));
+                BtnSwich2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA726")));
+                BtnSwich3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA726")));
                 layout1.setVisibility(View.VISIBLE);
                 layout2.setVisibility(View.INVISIBLE);
                 layout3.setVisibility(View.INVISIBLE);
@@ -108,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtnSwich2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Btnswich1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA726")));
+                BtnSwich2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1B6A9C")));
+                BtnSwich3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA726")));
                 layout1.setVisibility(View.INVISIBLE);
                 layout2.setVisibility(View.VISIBLE);
                 layout3.setVisibility(View.INVISIBLE);
@@ -116,6 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtnSwich3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Btnswich1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA726")));
+                BtnSwich2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA726")));
+                BtnSwich3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1B6A9C")));
                 layout1.setVisibility(View.INVISIBLE);
                 layout2.setVisibility(View.INVISIBLE);
                 layout3.setVisibility(View.VISIBLE);
@@ -142,13 +155,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
      swichDark.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                resultTv.setTextColor(Color.WHITE);
+                solutionTv.setTextColor(Color.WHITE);
                 headSwitch.setImageResource(R.drawable.headdark1);
                 imageKeyboard.setImageResource(R.drawable.keyboarddark1);
                 imageTopOn.setImageResource(R.drawable.dark2);
             } else {
+                resultTv.setTextColor(Color.BLACK);
+                solutionTv.setTextColor(Color.BLACK);
                 headSwitch.setImageResource(R.drawable.head1);
                 imageKeyboard.setImageResource(R.drawable.keyboard1);
-                imageTopOn.setImageResource(R.drawable.light2);
+                imageTopOn.setImageResource(R.drawable.light3);
             }
         });
 
@@ -239,18 +256,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MaterialButton button = (MaterialButton) v;
         String buttonText = button.getText().toString();
 
+
+        int i = 0;
+        int j = 0;
+        if (!buttonText.equals("C")) {
+            buttonList[i] = buttonText;
+            i++;
+            j = i - 1;
+        }
+
         if(buttonText.equals("AC")){
             solutionTv.setText("");
             resultTv.setText("0");
             dataToCalculate = "";
             buttonText = "";
+            i = 0;
+            j = 0;
             return;
         }
         if(buttonText.equals("C")){
             if (!dataToCalculate.isEmpty()) {
-                dataToCalculate = dataToCalculate.substring(0, dataToCalculate.length() - buttonText.length());
-                buttonText = "";
-            }
+                dataToCalculate = dataToCalculate.substring(0, dataToCalculate.length() - buttonList[j].length());
+                if (j > 0){j--;}
+           }
+            buttonText = "";
         }
         if(buttonText.equals("=")){
             try {
